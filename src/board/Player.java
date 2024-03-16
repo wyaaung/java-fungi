@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import cards.Card;
 import cards.CardType;
+import cards.Mushroom;
 import cards.Pan;
 import cards.Stick;
 
@@ -93,7 +94,44 @@ public class Player {
     }
 
     public boolean sellMushrooms(String mushroomName, int quantity) {
-        return false;
+        if (quantity < 2) {
+            return false;
+        }
+
+        String processedMushroomName = mushroomName.toLowerCase().replaceAll("'", "").replaceAll(" ", "");
+
+        int totalInHand = 0, sticksToAdd = 0;
+
+        for (int i = 0; i < this.hand.size(); i++) {
+            Card tempCard = this.hand.getElementAt(i);
+            if (processedMushroomName.equals(tempCard.getName())) {
+                if (tempCard.getType() == CardType.DAYMUSHROOM) {
+                    totalInHand++;
+                    Mushroom sample = (Mushroom) tempCard;
+                    sticksToAdd += sample.getSticksPerMushroom();
+                } else if (tempCard.getType() == CardType.NIGHTMUSHROOM){
+                    totalInHand += 2;
+                    Mushroom sample = (Mushroom) tempCard;
+                    sticksToAdd += sample.getSticksPerMushroom();
+                }
+            }
+        }
+
+        if (totalInHand < 0 || totalInHand < quantity) {
+            return false;
+        }
+
+        addSticks(sticksToAdd);
+
+        for (int i = 0; i < hand.size(); i++) {
+            Card tempCard = this.hand.getElementAt(i);
+            if (processedMushroomName.equals(tempCard.getName())) {
+                hand.removeElement(i);
+                i--;
+            }
+        }
+
+        return true;
     }
 
     public boolean putPanDown() {
