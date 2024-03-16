@@ -135,6 +135,16 @@ public class Player {
     }
 
     public boolean putPanDown() {
+        for (int i = 0; i < this.hand.size(); i++) {
+            Card tempCard = this.hand.getElementAt(i);
+            if (tempCard.getType() == CardType.PAN) {
+                this.display.add(tempCard);
+                this.hand.removeElement(i);
+
+                return true;
+            }
+        }
+
         return false;
     }
 }
