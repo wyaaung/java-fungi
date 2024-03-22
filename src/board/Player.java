@@ -43,6 +43,7 @@ public class Player {
     public void addSticks(int numOfSticks) {
         while (numOfSticks > 0){
             this.display.add(new Stick());
+            this.sticks++;
             numOfSticks--;
         }
     }
@@ -55,6 +56,7 @@ public class Player {
         for (int i = 0; i < this.display.size(); i++) {
             if ((this.display.getElementAt(i).getType() == CardType.STICK) && (numOfSticks > 0)) {
                 this.display.removeElement(i);
+                this.sticks--;
                 numOfSticks--;
             }
         }
@@ -82,11 +84,11 @@ public class Player {
     }
 
     public boolean takeCardFromTheForest(int index) {
-        return false;
+        return true;
     }
 
     public boolean takeFromDecay() {
-        return false;
+        return true;
     }
 
     public boolean cookMushrooms(ArrayList<Card> mushrooms) {
