@@ -74,9 +74,12 @@ public class Board {
     }
 
     public static void updateDecayPile() {
+        int lastIndex = forest.size() - 1;
+
         if (decayPile.size() >= 4){
             decayPile.clear();
         }
-        decayPile.add(forest.removeCardAt(1));
+
+        decayPile.add(forest.removeCardAt(lastIndex));
     }
 }
