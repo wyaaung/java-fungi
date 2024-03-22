@@ -58,6 +58,8 @@ public class Player {
                 this.display.removeElement(i);
                 this.sticks--;
                 numOfSticks--;
+
+                i--;
             }
         }
     }
@@ -103,7 +105,7 @@ public class Player {
         if (index > 2 && index < 9) {
             this.removeSticks(sticksNeeded);
         }
-        
+
         this.addCardtoHand(cardToTake);
 
         return true;
