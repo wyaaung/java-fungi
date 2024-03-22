@@ -110,6 +110,28 @@ public class Player {
     }
 
     public boolean takeFromDecay() {
+        int basketCards = 0, sizeOfDecayPile = Board.getDecayPile().size();
+
+        for (Card card : Board.getDecayPile()) {
+            if (card.getType() == CardType.BASKET) {
+                basketCards++;
+                this.handLimit += 2;
+            }
+        }
+
+        if (this.getHandLimit() - this.getHand().size() < sizeOfDecayPile - basketCards) {
+            return false;
+        }
+
+        for (Card card : Board.getDecayPile()) {
+            if (card.getType() == CardType.BASKET) {
+                this.addCardtoDisplay(card);
+            } else {
+                this.addCardtoHand(card);
+            }
+        }
+        Board.getDecayPile().clear();
+
         return true;
     }
 
