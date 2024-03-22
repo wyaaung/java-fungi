@@ -84,6 +84,28 @@ public class Player {
     }
 
     public boolean takeCardFromTheForest(int index) {
+        Card cardToTake = Board.getForest().getElementAt(index - 1);
+
+        if (index < 1 || index > 8) {
+            return false;
+        }
+
+        if (this.handLimit <= this.hand.size()) {
+            return false;
+        }
+
+        int sticksNeeded = index - 2;
+
+        if (sticksNeeded > this.getStickNumber()) {
+            return false;
+        }
+
+        if (index > 2 && index < 9) {
+            this.removeSticks(sticksNeeded);
+        }
+        
+        this.addCardtoHand(cardToTake);
+
         return true;
     }
 
