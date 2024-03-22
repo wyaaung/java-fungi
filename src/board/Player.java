@@ -148,36 +148,47 @@ public class Player {
 
         String processedMushroomName = mushroomName.toLowerCase().replaceAll("'", "").replaceAll(" ", "");
 
-        int totalInHand = 0, sticksToAdd = 0;
+        int numberOfDayMushroom = 0, noOfNightMushroom = 0, sticksToAdd = 0;
 
         for (int i = 0; i < this.hand.size(); i++) {
             Card tempCard = this.hand.getElementAt(i);
             if (processedMushroomName.equals(tempCard.getName())) {
                 if (tempCard.getType() == CardType.DAYMUSHROOM) {
-                    totalInHand++;
-                    Mushroom sample = (Mushroom) tempCard;
-                    sticksToAdd += sample.getSticksPerMushroom();
+                    numberOfDayMushroom++;
                 } else if (tempCard.getType() == CardType.NIGHTMUSHROOM){
-                    totalInHand += 2;
-                    Mushroom sample = (Mushroom) tempCard;
-                    sticksToAdd += sample.getSticksPerMushroom();
+                    noOfNightMushroom++;
                 }
             }
         }
 
-        if (totalInHand < 0 || totalInHand < quantity) {
+        if (numberOfDayMushroom + noOfNightMushroom <= 0) {
             return false;
         }
 
-        addSticks(sticksToAdd);
+        if (numberOfDayMushroom + 2 * noOfNightMushroom < quantity) {
+            return false;
+        }
 
-        for (int i = 0; i < hand.size(); i++) {
+        for (int i = 0; i < this.hand.size(); i++) {
             Card tempCard = this.hand.getElementAt(i);
-            if (processedMushroomName.equals(tempCard.getName())) {
-                hand.removeElement(i);
-                i--;
+            if (processedMushroomName.equals(tempCard.getName()) && quantity > 0) {
+                if (tempCard.getType() == CardType.DAYMUSHROOM) {
+                    quantity--;
+                    this.hand.removeElement(i);
+                    i--;
+                    Mushroom sample = (Mushroom) tempCard;
+                    sticksToAdd += sample.getSticksPerMushroom();
+                } else if (tempCard.getType() == CardType.NIGHTMUSHROOM) {
+                    quantity-=2;
+                    this.hand.removeElement(i);
+                    i--;
+                    Mushroom sample = (Mushroom) tempCard;
+                    sticksToAdd += sample.getSticksPerMushroom() * 2;
+                }
             }
         }
+
+        addSticks(sticksToAdd);
 
         return true;
     }
