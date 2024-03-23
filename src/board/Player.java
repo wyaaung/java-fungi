@@ -1,8 +1,13 @@
 package board;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 
 import cards.Card;
+import cards.EdibleItem;
 import cards.CardType;
 import cards.Mushroom;
 import cards.Pan;
@@ -137,8 +142,113 @@ public class Player {
         return true;
     }
 
-    public boolean cookMushrooms(ArrayList<Card> mushrooms) {
-        return false;
+    /**
+     * Input ArrayList contains cards of the hand that the player has indicated.
+     */
+    public boolean cookMushrooms(ArrayList<Card> ingredients) {
+        System.out.println(ingredients);
+        Boolean nonEdible = false;
+        Integer indexPanInDisplay = null, indexPanInIngredients = null;
+
+        for (int i = 0; i < ingredients.size(); i++) {
+            if (ingredients.get(i).getType() == CardType.PAN) {
+                indexPanInIngredients = i;
+            } else if (ingredients.get(i).getType() == CardType.BASKET || ingredients.get(i).getType() == CardType.STICK) {
+                nonEdible = true;
+            }
+        }
+
+        if (indexPanInIngredients == null) {
+            for (int i = 0; i < this.display.size(); i++) {
+                if (this.display.getElementAt(i).getType() == CardType.PAN) {
+                    indexPanInDisplay = i;
+                }
+            }
+        }
+
+        System.out.println(indexPanInDisplay);
+        System.out.println(indexPanInIngredients);
+
+        if (indexPanInDisplay == null && indexPanInIngredients == null) {
+            return false;
+        }
+
+        if (nonEdible) {
+            return false;
+        }
+
+        // int baseFlavorPoints = 0;
+        Map<String, Integer> cardCount = ingredients.stream()
+                    .collect(Collectors.groupingBy(
+                        Card::getName,
+                        Collectors.summingInt(card -> {
+
+                            if (card.getType() == CardType.NIGHTMUSHROOM) {
+                                return 2;
+                            } else {
+                                return 1;
+                            }
+                        })
+                    ));
+
+        int mushroomType = cardCount.entrySet().stream()
+                            .filter(card -> card.getKey() != "butter" && card.getKey() != "cider" && card.getKey() != "stick" && card.getKey() != "basket" && card.getKey() != "pan" )
+                            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)).size();
+
+        if (mushroomType > 1) {
+            return false;
+        }
+
+        Integer butterCount = cardCount.getOrDefault("butter", 0);
+        Integer ciderCount = cardCount.getOrDefault("cider", 0);
+
+        cardCount = cardCount.entrySet().stream()
+                    .filter(card -> (card.getKey() != "butter" || card.getKey() != "cider") && card.getValue() >= 3)
+                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+                    int baseFlavorPoints = ingredients.stream()
+                    .filter(card -> card instanceof EdibleItem)
+                    .mapToInt(card -> {
+                        EdibleItem sample = (EdibleItem) card;
+                        return card.getType() == CardType.NIGHTMUSHROOM ? sample.getFlavourPoints() * 2 : 
+                        card.getType() == CardType.DAYMUSHROOM ? sample.getFlavourPoints() : 0;
+                    })
+                    .sum();
+
+        if (cardCount.isEmpty()) {
+            return false;
+        }
+
+        for (Map.Entry<String,Integer> entry : cardCount.entrySet()) {
+            System.out.println(entry.getValue());
+            System.out.println(butterCount * 4 + ciderCount * 5);
+            if (butterCount > 0 || ciderCount > 0) {
+                if (entry.getValue() < butterCount * 4 + ciderCount * 5) {
+                    return false;
+                }
+            }
+
+
+            for (int i = 0; i < this.hand.size(); i++) {
+                Card tempCard = this.hand.getElementAt(i);
+                if (tempCard.getName() == "butter" && butterCount > 0) {
+                    this.hand.removeElement(i);
+                    i--;
+                    butterCount--;
+                } else if (tempCard.getName() == "cider" && ciderCount > 0) {
+                    this.hand.removeElement(i);
+                    i--;
+                    ciderCount--;
+                } else if (tempCard.getName() == entry.getKey()) {
+                    this.hand.removeElement(i);
+                    i--;
+                }
+            }
+        }
+
+        this.score = this.score + baseFlavorPoints + butterCount * 3 + ciderCount * 5;
+
+        return true;
     }
 
     public boolean sellMushrooms(String mushroomName, int quantity) {
