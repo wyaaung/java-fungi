@@ -7,7 +7,7 @@ public class CardList {
     private final ArrayList<Card> cardList;
 
     public CardList() {
-        cardList = new ArrayList<Card>();
+        cardList = new ArrayList<>();
     }
 
     public void add(Card card) {

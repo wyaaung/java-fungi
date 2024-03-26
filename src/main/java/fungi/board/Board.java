@@ -25,7 +25,7 @@ public class Board {
     public static void initialisePiles() {
         forestCardPile = new CardPile();
         forest = new CardList();
-        decayPile = new ArrayList<Card>();
+        decayPile = new ArrayList<>();
     }
 
     public static void setUpCards() {

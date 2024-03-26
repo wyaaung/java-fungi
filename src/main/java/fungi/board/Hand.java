@@ -4,7 +4,7 @@ import fungi.cards.Card;
 import java.util.ArrayList;
 
 public class Hand implements Displayable {
-    private final ArrayList<Card> handList = new ArrayList<Card>();
+    private final ArrayList<Card> handList = new ArrayList<>();
 
     public void add(Card card) {
         handList.add(card);

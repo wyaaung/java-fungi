@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class PlayerTest {
 
     private static Player p;
-    private static final ArrayList<Card> cookingCards = new ArrayList<Card>();
+    private static final ArrayList<Card> cookingCards = new ArrayList<>();
     private CardList fst;
 
     @BeforeEach
