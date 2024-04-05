@@ -7,20 +7,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class MorelTest {
-    static Morel md;
+  static Morel md;
 
-    @BeforeAll
-    public static void setUp() {
-        md = new Morel(CardType.DAYMUSHROOM);
-    }
+  @BeforeAll
+  public static void setUp() {
+    md = new Morel(CardType.DAYMUSHROOM);
+  }
 
-    @Test
-    public void testFlavourDay() {
-        assertEquals(md.getFlavourPoints(), 6);
-    }
+  @Test
+  public void testFlavourDay() {
+    assertEquals(md.getFlavourPoints(), 6);
+  }
 
-    @Test
-    public void testSticksDay() {
-        assertEquals(md.getSticksPerMushroom(), 4);
-    }
+  @Test
+  public void testSticksDay() {
+    assertEquals(md.getSticksPerMushroom(), 4);
+  }
 }

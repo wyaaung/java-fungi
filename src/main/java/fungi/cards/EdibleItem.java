@@ -1,13 +1,13 @@
 package fungi.cards;
 
 public class EdibleItem extends Card {
-    protected int flavourPoints;
+  protected int flavourPoints;
 
-    public EdibleItem(CardType cardType, String cardName) {
-        super(cardType, cardName);
-    }
+  public EdibleItem(CardType cardType, String cardName) {
+    super(cardType, cardName);
+  }
 
-    public int getFlavourPoints() {
-        return flavourPoints;
-    }
+  public int getFlavourPoints() {
+    return flavourPoints;
+  }
 }

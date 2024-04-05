@@ -1,13 +1,13 @@
 package fungi.cards;
 
 public class Mushroom extends EdibleItem {
-    protected int sticksPerMushroom;
+  protected int sticksPerMushroom;
 
-    public Mushroom(CardType cardType, String name) {
-        super(cardType, name);
-    }
+  public Mushroom(CardType cardType, String name) {
+    super(cardType, name);
+  }
 
-    public int getSticksPerMushroom() {
-        return sticksPerMushroom;
-    }
+  public int getSticksPerMushroom() {
+    return sticksPerMushroom;
+  }
 }

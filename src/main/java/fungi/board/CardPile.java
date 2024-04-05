@@ -5,29 +5,29 @@ import java.util.Collections;
 import java.util.Stack;
 
 public class CardPile {
-    private final Stack<Card> cardPile;
+  private final Stack<Card> cardPile;
 
-    public CardPile() {
-        cardPile = new Stack<Card>();
-    }
+  public CardPile() {
+    cardPile = new Stack<Card>();
+  }
 
-    public void addCard(Card card) {
-        cardPile.push(card);
-    }
+  public void addCard(Card card) {
+    cardPile.push(card);
+  }
 
-    public Card drawCard() {
-        return cardPile.pop();
-    }
+  public Card drawCard() {
+    return cardPile.pop();
+  }
 
-    public void shufflePile() {
-        Collections.shuffle(cardPile);
-    }
+  public void shufflePile() {
+    Collections.shuffle(cardPile);
+  }
 
-    public int pileSize() {
-        return cardPile.size();
-    }
+  public int pileSize() {
+    return cardPile.size();
+  }
 
-    public boolean isEmpty() {
-        return cardPile.isEmpty();
-    }
+  public boolean isEmpty() {
+    return cardPile.isEmpty();
+  }
 }

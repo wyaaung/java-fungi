@@ -7,22 +7,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TreeEarTest {
 
-    static TreeEar ted;
+  static TreeEar ted;
 
-    @BeforeAll
-    public static void setUp() {
-        ted = new TreeEar(CardType.DAYMUSHROOM);
-    }
+  @BeforeAll
+  public static void setUp() {
+    ted = new TreeEar(CardType.DAYMUSHROOM);
+  }
 
-    @Test
-    public void testFlavourDay() {
-        assertEquals(ted.getFlavourPoints(), 1);
-    }
+  @Test
+  public void testFlavourDay() {
+    assertEquals(ted.getFlavourPoints(), 1);
+  }
 
-    @Test
-    public void testSticksDay() {
-        assertEquals(ted.getSticksPerMushroom(), 2);
-    }
+  @Test
+  public void testSticksDay() {
+    assertEquals(ted.getSticksPerMushroom(), 2);
+  }
 
 
 }

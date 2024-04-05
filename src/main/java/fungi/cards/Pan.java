@@ -1,7 +1,7 @@
 package fungi.cards;
 
 public class Pan extends Card {
-    public Pan() {
-        super(CardType.PAN, "pan");
-    }
+  public Pan() {
+    super(CardType.PAN, "pan");
+  }
 }

@@ -7,21 +7,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HoneyFungusTest {
 
-    static HoneyFungus hfd;
+  static HoneyFungus hfd;
 
-    @BeforeAll
-    public static void setUp() {
-        hfd = new HoneyFungus(CardType.DAYMUSHROOM);
-    }
+  @BeforeAll
+  public static void setUp() {
+    hfd = new HoneyFungus(CardType.DAYMUSHROOM);
+  }
 
-    @Test
-    public void testFlavourDay() {
-        assertEquals(hfd.getFlavourPoints(), 1);
-    }
+  @Test
+  public void testFlavourDay() {
+    assertEquals(hfd.getFlavourPoints(), 1);
+  }
 
-    @Test
-    public void testSticksDay() {
-        assertEquals(hfd.getSticksPerMushroom(), 1);
-    }
+  @Test
+  public void testSticksDay() {
+    assertEquals(hfd.getSticksPerMushroom(), 1);
+  }
 
 }

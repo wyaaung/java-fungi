@@ -1,20 +1,20 @@
 package fungi.cards;
 
 public class Card {
-    protected CardType cardType;
+  protected CardType cardType;
 
-    protected String cardName;
+  protected String cardName;
 
-    public Card(CardType cardType, String cardName) {
-        this.cardType = cardType;
-        this.cardName = cardName;
-    }
+  public Card(CardType cardType, String cardName) {
+    this.cardType = cardType;
+    this.cardName = cardName;
+  }
 
-    public CardType getType() {
-        return this.cardType;
-    }
+  public CardType getType() {
+    return this.cardType;
+  }
 
-    public String getName() {
-        return this.cardName;
-    }
+  public String getName() {
+    return this.cardName;
+  }
 }

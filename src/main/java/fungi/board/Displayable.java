@@ -3,11 +3,11 @@ package fungi.board;
 import fungi.cards.Card;
 
 public interface Displayable {
-    void add(Card card);
+  void add(Card card);
 
-    int size();
+  int size();
 
-    Card getElementAt(int index);
+  Card getElementAt(int index);
 
-    Card removeElement(int index);
+  Card removeElement(int index);
 }

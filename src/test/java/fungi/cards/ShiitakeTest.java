@@ -7,20 +7,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class ShiitakeTest {
-    static Shiitake sd;
+  static Shiitake sd;
 
-    @BeforeAll
-    public static void setUp() {
-        sd = new Shiitake(CardType.DAYMUSHROOM);
-    }
+  @BeforeAll
+  public static void setUp() {
+    sd = new Shiitake(CardType.DAYMUSHROOM);
+  }
 
-    @Test
-    public void testFlavourDay() {
-        assertEquals(sd.getFlavourPoints(), 2);
-    }
+  @Test
+  public void testFlavourDay() {
+    assertEquals(sd.getFlavourPoints(), 2);
+  }
 
-    @Test
-    public void testSticksDay() {
-        assertEquals(sd.getSticksPerMushroom(), 2);
-    }
+  @Test
+  public void testSticksDay() {
+    assertEquals(sd.getSticksPerMushroom(), 2);
+  }
 }
